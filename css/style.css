@@ -268,7 +268,7 @@ body {
   color: var(--text-muted);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -301,7 +301,7 @@ body {
 
 .field-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -311,13 +311,13 @@ body {
 
 .field-hint {
   margin-top: 6px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-light);
   line-height: 1.45;
 }
 
 .counter {
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   font-weight: 600;
   color: var(--text-light);
   font-variant-numeric: tabular-nums;
@@ -332,7 +332,7 @@ body {
   border-radius: var(--r-ctl);
   background: #ffffff;
   font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-main);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -359,7 +359,7 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 500;
   box-shadow: var(--shadow-inset);
   cursor: pointer;
@@ -418,8 +418,8 @@ body {
 }
 
 .drop-label { display: flex; flex-direction: column; gap: 2px; line-height: 1.35; }
-.drop-label strong { color: var(--cyan-dark); font-weight: 700; font-size: 0.84rem; }
-.drop-label small  { font-size: 0.72rem; color: var(--text-light); }
+.drop-label strong { color: var(--cyan-dark); font-weight: 700; font-size: 0.78rem; }
+.drop-label small  { font-size: 0.68rem; color: var(--text-light); }
 
 .label-touch { display: none; }
 @media (hover: none) and (pointer: coarse) {
@@ -438,7 +438,7 @@ body {
   background: none;
   color: var(--cyan-dark);
   font-family: 'Inter', sans-serif;
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -457,7 +457,7 @@ body {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(26, 190, 227, 0.3);
   transition: filter 0.15s ease, transform 0.15s ease;
@@ -477,7 +477,7 @@ body {
   background: #eafaf1;
   border: 1px solid #2ed38990;
   color: #1fae6e;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 600;
   word-break: break-word;
   animation: fadeIn 0.25s ease;
@@ -532,7 +532,7 @@ body {
 }
 
 .preview-meta {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   text-align: right;
   overflow: hidden;
@@ -568,7 +568,7 @@ body {
   justify-content: center;
   gap: 8px;
   color: var(--text-light);
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   text-align: center;
   padding: 16px;
 }
@@ -591,7 +591,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 48px;
+  height: 42px;
   padding: 0 6px 0 14px;
   border: 1px solid rgba(166, 185, 200, 0.4);
   border-radius: var(--r-ctl);
@@ -603,7 +603,7 @@ body {
 .input-fecha-wrap:focus-within { border-color: var(--cyan); box-shadow: var(--ring); }
 
 .input-prefix {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -615,14 +615,14 @@ body {
   outline: none;
   background: transparent;
   font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--text-main);
   cursor: pointer;
 }
 
 .input-codigo {
   width: 92px;
-  height: 48px;
+  height: 42px;
   flex-shrink: 0;
   text-align: center;
   letter-spacing: 3px;
@@ -634,7 +634,7 @@ body {
 .btn-generate {
   flex: 1;
   min-width: 0;
-  height: 48px;
+  height: 42px;
   padding: 0 14px;
   display: inline-flex;
   align-items: center;
@@ -644,7 +644,7 @@ body {
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   letter-spacing: 0.3px;
   white-space: nowrap;
   border: none;
@@ -705,7 +705,7 @@ body {
   border-radius: var(--r-ctl);
   background: var(--bg);
   box-shadow: 2px 2px 6px rgba(166, 185, 200, 0.3), -2px -2px 6px #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
 }
 .privacy-badge .dot {
@@ -720,7 +720,7 @@ body {
 .message-box {
   padding: 11px 16px;
   border-radius: var(--r-ctl);
-  font-size: 0.83rem;
+  font-size: 0.78rem;
   line-height: 1.5;
   display: none;
   font-weight: 500;
@@ -748,7 +748,7 @@ body {
 }
 
 .progress-label {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   margin-bottom: 7px;
   display: flex;
@@ -856,7 +856,7 @@ body {
   body { padding: 10px; }
   .app-card { padding: 20px 14px; }
 
-  .seg-btn { font-size: 0.78rem; gap: 6px; padding: 0 6px; }
+  .seg-btn { font-size: 0.72rem; gap: 6px; padding: 0 6px; }
   .seg-btn .ico { width: 15px; height: 15px; }
 
   .actions-row { flex-wrap: wrap; }
