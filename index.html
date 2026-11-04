@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generador de Certificados</title>
+  <title>Generador de Certificados · Uso interno</title>
   <meta name="description" content="Genera certificados en PDF para alumnos y docentes de la Academia." />
   <meta name="robots" content="noindex, nofollow" />
 
@@ -29,6 +29,13 @@
     <aside class="side-panel">
       <img src="assets/logo.png" alt="Academia Creativos Digitales" class="side-logo" />
       <p class="side-tagline" aria-hidden="true">Generador de<br>Certificados</p>
+      <div class="internal-badge" role="note">
+        <i data-lucide="shield-alert" class="ico" aria-hidden="true"></i>
+        <span>
+          <strong>Uso exclusivo interno</strong>
+          <small>No compartas este enlace</small>
+        </span>
+      </div>
       <a href="#" target="_blank" rel="noopener" class="btn-tutorial" id="btn-tutorial" hidden>¿Cómo usar?</a>
       <img src="assets/personaje.png" alt="" class="side-personaje" aria-hidden="true" />
     </aside>
@@ -170,11 +177,11 @@
           </div>
 
           <div class="actions-row">
-            <label class="input-fecha-wrap" title="Fecha que se imprime en el certificado">
-              <span class="input-prefix">Fecha</span>
-              <input type="date" id="input-fecha" class="input-fecha" aria-label="Fecha del certificado" />
+            <label class="input-fecha-wrap" title="Año que se imprime en el certificado">
+              <span class="input-prefix">Año</span>
+              <select id="input-anio" class="input-fecha" aria-label="Año de emisión del certificado"></select>
             </label>
-            <input type="password" id="input-codigo" class="neu-input input-codigo" title="Código de acceso" inputmode="numeric" autocomplete="off" placeholder="Código" aria-label="Código de acceso" maxlength="12" hidden />
+            <input type="password" id="input-codigo" class="neu-input input-codigo" title="Código de acceso" inputmode="numeric" autocomplete="off" placeholder="Código" aria-label="Código de acceso" maxlength="12" />
             <button class="btn-generate" id="btn-generate" type="button">
               <div class="spinner" id="spinner" aria-hidden="true"></div>
               <i data-lucide="download" class="ico btn-icon" aria-hidden="true"></i>

@@ -895,3 +895,67 @@ body {
 }
 .progress-label span:last-child { flex-shrink: 0; }
 .status-zone:has(.privacy-badge[hidden]):has(.message-box:not(.visible)) { display: none; }
+
+/* ================================================
+   Aviso "Uso exclusivo interno" (panel lateral)
+   ================================================ */
+.internal-badge {
+  position: absolute;
+  top: 212px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-ctl);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+.internal-badge .ico { width: 22px; height: 22px; stroke-width: 2; flex-shrink: 0; }
+.internal-badge span { display: flex; flex-direction: column; line-height: 1.25; }
+.internal-badge strong {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.internal-badge small { font-size: 0.7rem; opacity: 0.9; }
+
+/* El botón "¿Cómo usar?" (si se activa) va debajo del aviso */
+.btn-tutorial { top: 290px; }
+
+/* ── Año de emisión (menú dentro del recuadro "Año") ── */
+select.input-fecha {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 26px 0 2px;
+  height: 100%;
+  font-weight: 600;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8fa3' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+.input-fecha-wrap { padding-right: 4px; }
+
+/* ── Código validado: queda completado y con borde verde ── */
+.input-codigo.ok {
+  border-color: #4cca8a;
+  box-shadow: 0 0 0 3px rgba(76, 202, 138, 0.15);
+}
+
+/* ── Móvil: el aviso pasa a la barra superior, compacto ── */
+@media (max-width: 760px) {
+  .internal-badge {
+    position: static;
+    padding: 6px 10px;
+    gap: 7px;
+    flex-shrink: 0;
+  }
+  .internal-badge .ico { width: 16px; height: 16px; }
+  .internal-badge strong { font-size: 0.62rem; letter-spacing: 0.3px; }
+  .internal-badge small { display: none; }
+}

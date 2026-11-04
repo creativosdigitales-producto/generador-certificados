@@ -48,6 +48,11 @@ Cada campo tiene:
 
 Guarda, recarga la página y mira la vista previa: el PDF sale idéntico.
 
+## Año de emisión
+
+El certificado muestra "Año de emisión: 2026" (abajo a la izquierda). El texto previo y
+cuántos años anteriores ofrece el menú se cambian en `js/config.js → fecha`.
+
 ## Agregar o cambiar un certificado
 
 1. Exportar la plantilla en PNG a 2000 × 1414 px.
@@ -64,7 +69,8 @@ node tools/generar-codigo.js 4821
 ```
 
 Pegar el hash que devuelve en `js/config.js → codigoAcceso.hash`.
-El código vale para toda la sesión del navegador (no se vuelve a pedir hasta cerrar la pestaña).
+El campo del código está siempre visible y se verifica en cada descarga. Una vez validado
+queda completado (con borde verde) mientras la pestaña esté abierta, para no reescribirlo.
 
 > Es una barrera contra el uso casual, no seguridad fuerte: alguien con
 > conocimientos técnicos puede saltarla, y en GitHub Pages gratuito el

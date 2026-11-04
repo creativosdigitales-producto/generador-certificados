@@ -28,7 +28,7 @@ const FAMILIA = {                             // nombres internos de las fuentes
 };
 const PAGINA_PDF = { ancho: 841.89, alto: 841.89 * H / W };   // A4 apaisado, en puntos
 const ESCALA_PDF = PAGINA_PDF.ancho / W;                      // px de plantilla → pt de PDF
-const SESION_OK  = 'certificados.acceso';
+const SESION_CODIGO = 'certificados.codigo';   // código recordado durante la sesión del navegador
 
 /* ── Estado ── */
 const estado = {
@@ -76,7 +76,7 @@ const el = {
   contTitulo:      $('contador-titulo'),
   contDesc:        $('contador-descripcion'),
 
-  inputFecha:      $('input-fecha'),
+  inputAnio:       $('input-anio'),
 
   previewFrame:    $('preview-frame'),
   previewCanvas:   $('preview-canvas'),
@@ -112,7 +112,11 @@ async function init() {
   if (window.lucide) lucide.createIcons();
 
   // Fecha de hoy por defecto
-  el.inputFecha.value = fechaISO(new Date());
+  // Año de emisión: el actual y algunos anteriores
+  const anioActual = new Date().getFullYear();
+  for (let a = anioActual; a >= anioActual - CONFIG.fecha.aniosAnteriores; a--) {
+    agregarOpcion(el.inputAnio, String(a), String(a), { selected: a === anioActual });
+  }
 
   // Guía "¿Cómo usar?"
   if (CONFIG.guiaUrl) {
@@ -121,7 +125,12 @@ async function init() {
   }
 
   // Código de acceso
-  el.inputCodigo.hidden = !requiereCodigo();
+  // Código de acceso: siempre visible; si ya se validó en esta sesión, aparece completado
+  el.inputCodigo.hidden = !CONFIG.codigoAcceso.activo;
+  try {
+    const guardado = sessionStorage.getItem(SESION_CODIGO);
+    if (guardado) { el.inputCodigo.value = guardado; el.inputCodigo.classList.add('ok'); }
+  } catch { /* sin almacenamiento */ }
 
   conectarEventos();
   aplicarVisibilidad();
@@ -201,10 +210,10 @@ function conectarEventos() {
   });
   el.inputTitulo.addEventListener('input', () => { actualizarContadores(); alCambiarDatos(); });
   el.inputDesc.addEventListener('input',   () => { actualizarContadores(); alCambiarDatos(); });
-  el.inputFecha.addEventListener('input',  alCambiarDatos);
+  el.inputAnio.addEventListener('change',  alCambiarDatos);
 
   // Código
-  el.inputCodigo.addEventListener('input', () => el.inputCodigo.classList.remove('error'));
+  el.inputCodigo.addEventListener('input', () => el.inputCodigo.classList.remove('error', 'ok'));
   el.inputCodigo.addEventListener('keydown', e => {
     if (e.key === 'Enter') { e.preventDefault(); generar(); }
   });
@@ -800,7 +809,7 @@ async function generar() {
                                                return mostrarMensaje('Escribe el título del certificado especial.', 'error');
   if (cert.especial && !el.inputDesc.value.trim())
                                                return mostrarMensaje('Escribe la descripción del certificado especial.', 'error');
-  if (!el.inputFecha.value)                    return mostrarMensaje('Elige la fecha del certificado.', 'error');
+  if (!el.inputAnio.value)                     return mostrarMensaje('Elige el año de emisión.', 'error');
 
   // 2. Código de acceso
   if (!(await verificarCodigo())) return;
@@ -914,13 +923,14 @@ function nombreArchivo(cert, nombres) {
 /* ================================================================
    Código de acceso
    ================================================================ */
-function requiereCodigo() {
-  if (!CONFIG.codigoAcceso.activo) return false;
-  try { return sessionStorage.getItem(SESION_OK) !== CONFIG.codigoAcceso.hash; } catch { return true; }
-}
-
+/**
+ * El campo del código está siempre visible y se verifica en CADA descarga.
+ * Una vez validado, queda completado (con borde verde) durante la sesión
+ * del navegador, para no tener que escribirlo cada vez. Si alguien lo
+ * borra o lo cambia, se vuelve a pedir.
+ */
 async function verificarCodigo() {
-  if (!requiereCodigo()) return true;
+  if (!CONFIG.codigoAcceso.activo) return true;
 
   const codigo = el.inputCodigo.value.trim();
   if (!codigo) {
@@ -938,8 +948,8 @@ async function verificarCodigo() {
     return false;
   }
 
-  try { sessionStorage.setItem(SESION_OK, hash); } catch { /* sin almacenamiento: se pedirá de nuevo */ }
-  el.inputCodigo.hidden = true;
+  try { sessionStorage.setItem(SESION_CODIGO, codigo); } catch { /* sin almacenamiento: se pedirá de nuevo */ }
+  el.inputCodigo.classList.add('ok');
   return true;
 }
 
@@ -997,17 +1007,10 @@ function actualizarContadores() {
   el.contDesc.classList.toggle('limit',   d >= CONFIG.limites.descripcion);
 }
 
+/** Texto que se imprime en el certificado, ej. "Año de emisión: 2026". */
 function textoFecha() {
-  const v = el.inputFecha.value;
-  if (!v) return '';
-  const [a, m, d] = v.split('-').map(Number);
-  const texto = new Intl.DateTimeFormat(CONFIG.fecha.idioma, CONFIG.fecha.formato).format(new Date(a, m - 1, d));
-  return CONFIG.fecha.prefijo + texto;
-}
-
-
-function fechaISO(d) {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const anio = el.inputAnio.value;
+  return anio ? CONFIG.fecha.prefijo + anio : '';
 }
 
 function setOcupado(ocupado, texto) {

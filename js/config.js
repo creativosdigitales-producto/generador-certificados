@@ -52,7 +52,7 @@ const CONFIG = {
         anchoMax: 1290,          // si el nombre es más largo, se achica la letra
         tamMax: 23, tamMin: 12,  // puntos (Canva)
       },
-      // Fecha: abajo a la izquierda, sobre la línea decorativa
+      // Año de emisión: abajo a la izquierda, sobre la línea decorativa
       fecha: {
         x: 505, y: 1214, align: 'center',
         tam: 12,
@@ -80,7 +80,7 @@ const CONFIG = {
         anchoMax: 1290,
         tamMax: 23, tamMin: 12,
       },
-      // Fecha: abajo a la izquierda, alineada con el margen del texto
+      // Año de emisión: abajo a la izquierda, alineado con el margen del texto
       fecha: {
         x: 310, y: 1210, align: 'left',
         tam: 12,
@@ -121,11 +121,13 @@ const CONFIG = {
     },
   },
 
-  /* ── Fecha ── */
+  /* ── Año de emisión ──
+     En el certificado se imprime:  prefijo + año  →  "Año de emisión: 2026"
+     Por defecto se elige el año actual; el menú permite elegir
+     algunos años anteriores (por certificados atrasados).            */
   fecha: {
-    idioma: 'es-AR',                                   // → "3 de noviembre de 2026"
-    formato: { day: 'numeric', month: 'long', year: 'numeric' },
-    prefijo: '',                                       // ej: 'Fecha: ' (vacío = solo la fecha)
+    prefijo: 'Año de emisión: ',
+    aniosAnteriores: 3,     // cuántos años hacia atrás muestra el menú
   },
 
   /* ── Planilla del colegio ── */
