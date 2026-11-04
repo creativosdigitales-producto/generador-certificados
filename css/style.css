@@ -189,7 +189,7 @@ body {
 .form-col { counter-reset: paso; }
 
 .step {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   counter-increment: paso;
 }
 .step:last-child { margin-bottom: 0; }
@@ -260,7 +260,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  height: 34px;
+  height: 36px;
   padding: 0 10px;
   border: none;
   border-radius: var(--r-thumb);
@@ -279,7 +279,7 @@ body {
 
 /* ── Panel que depende de la opción elegida ── */
 .sub-panel {
-  margin-top: 8px;
+  margin-top: 10px;
   padding: 12px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.55);
@@ -311,9 +311,10 @@ body {
 
 .field-hint {
   margin-top: 6px;
-  font-size: 0.68rem;
+  margin-left: 5px;
+  font-size: 0.61rem;
   color: var(--text-light);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .counter {
@@ -327,12 +328,12 @@ body {
 .neu-input {
   width: 100%;
   min-height: var(--h-ctl);
-  padding: 10px 14px;
+  padding: 10px 13px;
   border: 1px solid rgba(166, 185, 200, 0.4);
   border-radius: var(--r-ctl);
   background: #ffffff;
   font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-main);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -418,8 +419,8 @@ body {
 }
 
 .drop-label { display: flex; flex-direction: column; gap: 2px; line-height: 1.35; }
-.drop-label strong { color: var(--cyan-dark); font-weight: 700; font-size: 0.78rem; }
-.drop-label small  { font-size: 0.68rem; color: var(--text-light); }
+.drop-label strong { color: var(--cyan-dark); font-weight: 600; font-size: 0.76rem; }
+.drop-label small  { font-size: 0.66rem; color: var(--text-light); }
 
 .label-touch { display: none; }
 @media (hover: none) and (pointer: coarse) {
@@ -431,15 +432,16 @@ body {
 .link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
+  gap: 5px;
+  margin-top: 10px;
+  margin-left: 4px;
   padding: 2px 0;
   border: none;
   background: none;
   color: var(--cyan-dark);
   font-family: 'Inter', sans-serif;
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 .link-btn .ico { width: 14px; height: 14px; }
@@ -456,7 +458,7 @@ body {
   background: linear-gradient(135deg, var(--cyan) 20%, var(--cyan-dark) 100%);
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.78rem;
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(26, 190, 227, 0.3);
