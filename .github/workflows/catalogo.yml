@@ -1,0 +1,40 @@
+# Regenera certificados/catalogo.json cada vez que se agrega,
+# renombra o elimina una plantilla dentro de /certificados.
+# Así la lista de cursos de la app siempre está al día sin
+# tener que ejecutar nada a mano.
+name: Actualizar catálogo de certificados
+
+on:
+  push:
+    paths:
+      - 'certificados/**'
+      - '!certificados/catalogo.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  catalogo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generar catalogo.json
+        run: node tools/generar-catalogo.js
+
+      - name: Guardar cambios (si los hay)
+        run: |
+          if git diff --quiet -- certificados/catalogo.json; then
+            echo "El catálogo ya estaba al día."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+            git add certificados/catalogo.json
+            git commit -m "Actualizar catálogo de certificados"
+            git push
+          fi

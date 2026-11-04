@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Certificados</title>
+  <meta name="description" content="Genera certificados en PDF para alumnos y docentes de la Academia." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: Montserrat + Inter (interfaz) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- SheetJS — lectura de .xlsx -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <!-- jsPDF — generación del PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
+  <!-- Lucide — íconos (licencia ISC) -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.55.0/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- ═══ Panel lateral ═══ -->
+    <aside class="side-panel">
+      <img src="assets/logo.png" alt="Academia Creativos Digitales" class="side-logo" />
+      <p class="side-tagline" aria-hidden="true">Generador de<br>Certificados</p>
+      <a href="#" target="_blank" rel="noopener" class="btn-tutorial" id="btn-tutorial" hidden>¿Cómo usar?</a>
+      <img src="assets/personaje.png" alt="" class="side-personaje" aria-hidden="true" />
+    </aside>
+
+    <!-- ═══ Panel principal ═══ -->
+    <main class="app-card">
+      <div class="layout">
+
+        <header class="header">
+          <h1>Genera tus <span>Certificados</span> en segundos</h1>
+          <div class="divider"></div>
+        </header>
+
+        <!-- ─── Columna izquierda: formulario ─── -->
+        <div class="col-left">
+
+          <div class="form-col">
+
+            <!-- Paso 1: destinatario -->
+            <section class="step">
+              <h2 class="step-title">Para quién</h2>
+              <div class="seg" id="seg-destinatario" role="radiogroup" aria-label="Destinatario">
+                <span class="seg-thumb" aria-hidden="true"></span>
+                <button type="button" class="seg-btn active" data-value="alumnos" role="radio" aria-checked="true"><i data-lucide="backpack" class="ico"></i>Alumnos</button>
+                <button type="button" class="seg-btn" data-value="docentes" role="radio" aria-checked="false"><i data-lucide="presentation" class="ico"></i>Docentes</button>
+              </div>
+            </section>
+
+            <!-- Paso 2: nombres -->
+            <section class="step">
+              <h2 class="step-title" id="titulo-nombres">Nombres</h2>
+
+              <div class="seg" id="seg-origen" role="radiogroup" aria-label="Origen de los nombres">
+                <span class="seg-thumb" aria-hidden="true"></span>
+                <button type="button" class="seg-btn active" data-value="planilla" role="radio" aria-checked="true"><i data-lucide="file-spreadsheet" class="ico"></i>Planilla del colegio</button>
+                <button type="button" class="seg-btn" data-value="manual" role="radio" aria-checked="false"><i data-lucide="pen-line" class="ico"></i>Escribir a mano</button>
+              </div>
+
+              <!-- Panel que depende de la opción elegida arriba -->
+              <div class="sub-panel" id="panel-nombres">
+
+                <!-- Opción: planilla -->
+                <div id="zona-planilla">
+                  <div id="planilla-carga">
+                    <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Seleccionar planilla Excel">
+                      <input type="file" id="file-input" accept=".xlsx" aria-label="Seleccionar archivo .xlsx" />
+                      <i data-lucide="folder-open" class="drop-icon" aria-hidden="true"></i>
+                      <div class="drop-label">
+                        <strong class="label-pointer">Arrastra el archivo .xlsx o haz clic</strong>
+                        <strong class="label-touch">Toca para elegir el archivo .xlsx</strong>
+                        <small>Planilla del colegio exportada de Excel o Google Sheets</small>
+                      </div>
+                    </div>
+
+                    <div class="link-zone" id="zone-link" hidden>
+                      <div class="link-input-group">
+                        <input type="url" id="input-link" class="neu-input" placeholder="https://docs.google.com/spreadsheets/d/..." aria-label="Enlace de Google Sheets" />
+                        <button class="btn-load-link" id="btn-load-link" type="button">Cargar</button>
+                      </div>
+                      <p class="field-hint">La planilla debe estar compartida como "Cualquier persona con el enlace".</p>
+                    </div>
+
+                    <button type="button" class="link-btn" id="btn-modo-enlace">
+                      <i data-lucide="link" class="ico"></i><span>¿Está en Google Sheets? Pegar enlace</span>
+                    </button>
+                  </div>
+
+                  <div class="source-loaded-badge" id="source-loaded-badge" hidden aria-live="polite">
+                    <span class="badge-text"><i data-lucide="circle-check" class="ico"></i><span id="source-loaded-name"></span></span>
+                    <button id="btn-clear-source" class="btn-clear-file" type="button" aria-label="Quitar planilla" title="Quitar planilla"><i data-lucide="x" class="ico"></i></button>
+                  </div>
+
+                  <div class="field" id="campo-grupo" hidden>
+                    <select id="select-grupo" class="neu-select" aria-label="Grupo"></select>
+                  </div>
+                </div>
+
+                <!-- Opción: escritura a mano -->
+                <div id="zona-manual" hidden>
+                  <div class="field-row">
+                    <label for="input-nombres" class="field-label">Nombre completo</label>
+                    <span class="counter" id="contador-nombres">0/50</span>
+                  </div>
+                  <textarea id="input-nombres" class="neu-input neu-textarea" rows="2" placeholder="Ej: Gianella Paz Aguirre" spellcheck="false"></textarea>
+                  <p class="field-hint">¿Son varios? Escribe uno por línea: se genera un PDF con una página por persona.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Paso 3: certificado -->
+            <section class="step">
+              <h2 class="step-title">Certificado</h2>
+              <div class="seg" id="seg-area" role="radiogroup" aria-label="Área">
+                <span class="seg-thumb" aria-hidden="true"></span>
+                <button type="button" class="seg-btn active" data-value="programacion" role="radio" aria-checked="true"><i data-lucide="code-xml" class="ico"></i>Programación</button>
+                <button type="button" class="seg-btn" data-value="robotica" role="radio" aria-checked="false"><i data-lucide="bot" class="ico"></i>Robótica</button>
+              </div>
+
+              <div class="field">
+                <select id="select-curso" class="neu-select" aria-label="Curso"></select>
+              </div>
+
+              <!-- Campos del certificado especial -->
+              <div class="sub-panel" id="zona-especial" hidden>
+                <div id="campo-titulo">
+                  <div class="field-row">
+                    <label for="input-titulo" class="field-label">Título</label>
+                    <span class="counter" id="contador-titulo">0/20</span>
+                  </div>
+                  <input type="text" id="input-titulo" class="neu-input input-upper" placeholder="Ej: TALLER DE VERANO" />
+                </div>
+                <div class="field">
+                  <div class="field-row">
+                    <label for="input-descripcion" class="field-label">Descripción</label>
+                    <span class="counter" id="contador-descripcion">0/220</span>
+                  </div>
+                  <textarea id="input-descripcion" class="neu-input neu-textarea" rows="4" placeholder="Ej: Por haber participado del taller de verano de programación creativa..."></textarea>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- ─── Columna derecha: vista previa + descarga ─── -->
+        <div class="col-right">
+
+          <div class="preview-card">
+            <div class="preview-head">
+              <span class="preview-title">Vista previa</span>
+              <span class="preview-meta" id="preview-meta"></span>
+            </div>
+            <div class="preview-frame" id="preview-frame">
+              <canvas id="preview-canvas" width="2000" height="1414" aria-label="Vista previa del certificado"></canvas>
+              <div class="preview-empty" id="preview-empty">
+                <i data-lucide="graduation-cap" class="preview-empty-icon" aria-hidden="true"></i>
+                <p>Elige un curso para ver el certificado</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <label class="input-fecha-wrap" title="Fecha que se imprime en el certificado">
+              <span class="input-prefix">Fecha</span>
+              <input type="date" id="input-fecha" class="input-fecha" aria-label="Fecha del certificado" />
+            </label>
+            <input type="password" id="input-codigo" class="neu-input input-codigo" title="Código de acceso" inputmode="numeric" autocomplete="off" placeholder="Código" aria-label="Código de acceso" maxlength="12" hidden />
+            <button class="btn-generate" id="btn-generate" type="button">
+              <div class="spinner" id="spinner" aria-hidden="true"></div>
+              <i data-lucide="download" class="ico btn-icon" aria-hidden="true"></i>
+              <span id="btn-text">Generar PDF</span>
+              <span class="btn-count" id="btn-count" hidden></span>
+            </button>
+          </div>
+
+          <div class="status-zone">
+            <div class="privacy-badge" id="privacy-badge">
+              <span class="dot"></span>
+              Tus datos nunca salen del navegador — procesamiento 100% local.
+            </div>
+            <div class="message-box" id="message-box" role="alert" aria-live="assertive"></div>
+          </div>
+
+          <section class="progress-section" id="progress-section" aria-live="polite">
+            <div class="progress-label">
+              <span id="progress-label-text">Generando certificados…</span>
+              <span id="progress-text">0 de 0</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

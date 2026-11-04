@@ -1,0 +1,11 @@
+# Material de referencia: contiene planillas con datos reales de alumnos.
+# NO se publica (GitHub Pages en plan gratuito exige repositorio público).
+contexto/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configuración local de herramientas
+.claude/
