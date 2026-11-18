@@ -33,11 +33,11 @@ const CONFIG = {
   colores: {
     // Nombre, descripción y fecha
     texto: {
-      alumnos:  { programacion: '#00647c', robotica: '#005580' },
+      alumnos:  { programacion: '#00647c', robotica: '#005580', capsulas: '#005580' },
       docentes: { programacion: '#006987', robotica: '#006987' },
     },
     // Título de los certificados especiales (solo alumnos)
-    tituloEspecial: { programacion: '#fea123', robotica: '#09baed' },
+    tituloEspecial: { programacion: '#fea123', robotica: '#09baed', capsulas: '#fe9405' },
   },
 
   /* ── Posición y tamaño de cada campo ──
@@ -93,6 +93,34 @@ const CONFIG = {
         lineasMax: 4,
       },
     },
+
+    /* Cápsulas (solo alumnos): su plantilla tiene otro diseño,
+       con el contenido corrido a la derecha de la franja azul.  */
+    capsulas: {
+      // Nombre: centrado sobre el recuadro celeste (x 498–1879, y 650–769)
+      nombre: {
+        x: 1189, y: 728, align: 'center',
+        anchoMax: 1290,
+        tamMax: 23, tamMin: 12,
+      },
+      // Año de emisión: centrado debajo de las firmas
+      fecha: {
+        x: 1189, y: 1275, align: 'center',
+        tam: 11,
+      },
+      titulo: {
+        x: 1189, y: 465, align: 'center',
+        anchoMax: 1300,
+        tamMax: 21, tamMin: 14,
+      },
+      descripcion: {
+        x: 498, y: 837, align: 'left',
+        anchoMax: 1381,
+        tam: 14, tamMin: 11,
+        interlineado: 43,
+        lineasMax: 4,
+      },
+    },
   },
 
   /* ── Límites de caracteres (incluyendo espacios) ──
@@ -113,6 +141,7 @@ const CONFIG = {
     alumnos: {
       programacion: 'certificados/genericos/plantilla-programacion-alumno.png',
       robotica:     'certificados/genericos/plantilla-robotica-alumno.png',
+      capsulas:     'certificados/genericos/plantilla-capsulas-alumno.png',
     },
     docentes: {
       // Docentes usa la misma plantilla para las dos áreas

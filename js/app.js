@@ -156,9 +156,12 @@ async function init() {
 /* ================================================================
    Eventos
    ================================================================ */
+let segArea = null;   // control de áreas (se ajusta al cambiar de destinatario)
+
 function conectarEventos() {
   segmentado(el.segDestinatario, v => {
     estado.destinatario = v;
+    ajustarAreas();
     aplicarVisibilidad();
     poblarCursos();
   });
@@ -168,10 +171,11 @@ function conectarEventos() {
     aplicarVisibilidad();
   });
 
-  segmentado(el.segArea, v => {
+  segArea = segmentado(el.segArea, v => {
     estado.area = v;
     poblarCursos();
   });
+  ajustarAreas();
 
   // Planilla: alternar entre subir archivo y pegar enlace de Google Sheets
   el.btnModoEnlace.addEventListener('click', () => {
@@ -224,25 +228,37 @@ function conectarEventos() {
 /**
  * Conecta un control segmentado (uno activo a la vez).
  * La "pastilla" de color se desliza hasta la opción elegida
- * mediante la variable CSS --i (índice de la opción activa).
+ * mediante la variable CSS --i (índice de la opción activa)
+ * y --n (cantidad de opciones visibles).
+ *
+ * Devuelve { refrescar, marcar } para cuando se ocultan opciones
+ * desde afuera (ej. "Cápsulas", que es solo para alumnos).
  */
 function segmentado(contenedor, alCambiar) {
   const botones = [...contenedor.querySelectorAll('.seg-btn')];
-  const moverPastilla = () => {
-    const i = Math.max(0, botones.findIndex(b => b.classList.contains('active')));
-    contenedor.style.setProperty('--i', i);
-    contenedor.style.setProperty('--n', botones.length);
-  };
-  moverPastilla();
+  const visibles = () => botones.filter(b => !b.hidden);
 
-  botones.forEach(b => b.addEventListener('click', () => {
-    if (b.classList.contains('active')) return;
+  const refrescar = () => {
+    const vis = visibles();
+    const i = Math.max(0, vis.findIndex(b => b.classList.contains('active')));
+    contenedor.style.setProperty('--i', i);
+    contenedor.style.setProperty('--n', vis.length);
+  };
+
+  /** Marca una opción como activa (sin avisar el cambio). */
+  const marcar = valor => {
     botones.forEach(x => {
-      const activo = x === b;
+      const activo = x.dataset.value === valor;
       x.classList.toggle('active', activo);
       x.setAttribute('aria-checked', String(activo));
     });
-    moverPastilla();
+    refrescar();
+  };
+  refrescar();
+
+  botones.forEach(b => b.addEventListener('click', () => {
+    if (b.classList.contains('active')) return;
+    marcar(b.dataset.value);
     ocultarMensaje();
     alCambiar(b.dataset.value);
   }));
@@ -250,12 +266,34 @@ function segmentado(contenedor, alCambiar) {
   // Flechas izquierda/derecha para moverse con el teclado
   contenedor.addEventListener('keydown', e => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    const i = botones.findIndex(b => b.classList.contains('active'));
-    const sig = botones[(i + (e.key === 'ArrowRight' ? 1 : -1) + botones.length) % botones.length];
+    const vis = visibles();
+    const i = vis.findIndex(b => b.classList.contains('active'));
+    const sig = vis[(i + (e.key === 'ArrowRight' ? 1 : -1) + vis.length) % vis.length];
     e.preventDefault();
     sig.focus();
     sig.click();
   });
+
+  return { refrescar, marcar };
+}
+
+/**
+ * Muestra solo las áreas que corresponden al destinatario
+ * (botones con data-solo="alumnos"). Si el área elegida queda
+ * oculta, se vuelve a Programación.
+ */
+function ajustarAreas() {
+  let elegidaOculta = false;
+  el.segArea.querySelectorAll('.seg-btn[data-solo]').forEach(b => {
+    b.hidden = b.dataset.solo !== estado.destinatario;
+    if (b.hidden && b.dataset.value === estado.area) elegidaOculta = true;
+  });
+  if (elegidaOculta) {
+    estado.area = 'programacion';
+    segArea.marcar(estado.area);
+  } else {
+    segArea.refrescar();
+  }
 }
 
 function alCambiarDatos() {
@@ -643,7 +681,8 @@ function trocearPalabra(palabras, peso, px, anchoMax) {
  * [{ texto, x, y, px, peso, color, align }]
  */
 function armarTextos({ destinatario, area, especial, nombre, titulo, descripcion, fecha, borrador }) {
-  const campos = CONFIG.campos[destinatario];
+  // Las cápsulas tienen su propia plantilla, con los campos en otro lugar
+  const campos = CONFIG.campos[area === 'capsulas' ? 'capsulas' : destinatario];
   const color  = CONFIG.colores.texto[destinatario][area];
   const out = [];
 

@@ -138,6 +138,148 @@
         "nombre": "Tinkercad Arduino 2",
         "archivo": "certificados/alumnos/robotica/09-Tinkercad Arduino 2.png"
       }
+    ],
+    "capsulas": [
+      {
+        "orden": 9999,
+        "nombre": "Archivos",
+        "archivo": "certificados/alumnos/capsulas/Archivos.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Canva",
+        "archivo": "certificados/alumnos/capsulas/Canva.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Ciudadanía Digital - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Ciudadanía Digital - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Ciudadanía Digital - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Ciudadanía Digital - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "ClipChamp",
+        "archivo": "certificados/alumnos/capsulas/ClipChamp.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Educación Financiera - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Educación Financiera - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Educación Financiera - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Educación Financiera - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Emprender en Roblox",
+        "archivo": "certificados/alumnos/capsulas/Emprender en Roblox.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Figma - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Figma - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Figma - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Figma - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Genially",
+        "archivo": "certificados/alumnos/capsulas/Genially.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Google Docs - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Google Docs - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Google Docs - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Google Docs - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Google Drive",
+        "archivo": "certificados/alumnos/capsulas/Google Drive.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Google Forms",
+        "archivo": "certificados/alumnos/capsulas/Google Forms.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Hojas de Cálculo - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Hojas de Cálculo - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Hojas de Cálculo - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Hojas de Cálculo - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Hojas de Cálculo - Nivel 3",
+        "archivo": "certificados/alumnos/capsulas/Hojas de Cálculo - Nivel 3.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Hojas de Cálculo - Nivel 4",
+        "archivo": "certificados/alumnos/capsulas/Hojas de Cálculo - Nivel 4.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Hojas de Cálculo - Nivel 5",
+        "archivo": "certificados/alumnos/capsulas/Hojas de Cálculo - Nivel 5.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Impresión 3D",
+        "archivo": "certificados/alumnos/capsulas/Impresión 3D.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Iniciación Informática",
+        "archivo": "certificados/alumnos/capsulas/Iniciación Informática.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Introducción a la IA - Nivel 1",
+        "archivo": "certificados/alumnos/capsulas/Introducción a la IA - Nivel 1.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Introducción a la IA - Nivel 2",
+        "archivo": "certificados/alumnos/capsulas/Introducción a la IA - Nivel 2.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Introducción a las presentaciones",
+        "archivo": "certificados/alumnos/capsulas/Introducción a las presentaciones.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Open Roberta",
+        "archivo": "certificados/alumnos/capsulas/Open Roberta.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Procesador de Textos",
+        "archivo": "certificados/alumnos/capsulas/Procesador de Textos.png"
+      },
+      {
+        "orden": 9999,
+        "nombre": "Tinkercad diseño 3D",
+        "archivo": "certificados/alumnos/capsulas/Tinkercad diseño 3D.png"
+      }
     ]
   },
   "docentes": {
@@ -284,6 +426,7 @@
         "nombre": "Tinkercad Arduino 2",
         "archivo": "certificados/docentes/robotica/09-Tinkercad Arduino 2.png"
       }
-    ]
+    ],
+    "capsulas": []
   }
 }

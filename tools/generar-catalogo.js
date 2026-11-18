@@ -17,6 +17,8 @@
 
    Reglas para los nombres de archivo:
      "07-Coder 1.png"  →  orden 7, nombre "Coder 1"
+     "Genially.png"    →  sin número: va después de los numerados,
+                          en orden alfabético (así están las cápsulas)
    El número de adelante solo sirve para ordenar la lista
    y no se muestra en la app.
    ================================================ */
@@ -29,7 +31,7 @@ const CERT_DIR    = path.join(ROOT, 'certificados');
 const OUTPUT_FILE = path.join(CERT_DIR, 'catalogo.json');
 
 const DESTINATARIOS = ['alumnos', 'docentes'];
-const AREAS         = ['programacion', 'robotica'];
+const AREAS         = ['programacion', 'robotica', 'capsulas'];   // cápsulas: solo alumnos
 const EXTENSIONES   = ['.png', '.jpg', '.jpeg'];
 
 function leerCursos(destinatario, area) {

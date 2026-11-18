@@ -14,6 +14,7 @@ js/app.js                  Lógica (no hace falta tocarlo para ajustes)
 certificados/
   alumnos/programacion/    "07-Coder 1.png"  → aparece como "Coder 1"
   alumnos/robotica/
+  alumnos/capsulas/        "Genially.png" → sin número: orden alfabético (solo alumnos)
   docentes/programacion/
   docentes/robotica/
   genericos/               Plantillas de los certificados "Especial"
@@ -35,7 +36,8 @@ porque el navegador bloquea la lectura de las plantillas.)
 
 ## Ajustar posiciones del texto
 
-Todo está en **`js/config.js` → `campos`**, separado en `alumnos` y `docentes`.
+Todo está en **`js/config.js` → `campos`**, separado en `alumnos`, `docentes` y `capsulas`
+(las cápsulas tienen una plantilla con otro diseño, así que llevan posiciones propias).
 Cada campo tiene:
 
 | Valor | Qué hace |
@@ -57,6 +59,7 @@ cuántos años anteriores ofrece el menú se cambian en `js/config.js → fecha`
 
 1. Exportar la plantilla en PNG a 2000 × 1414 px.
 2. Ponerla en la carpeta que corresponda, con número de orden: `19-Senior 4.png`.
+   En `capsulas/` no hace falta el número: se listan en orden alfabético.
 3. Subir el cambio a GitHub. Una GitHub Action regenera `certificados/catalogo.json`
    automáticamente (ver `.github/workflows/catalogo.yml`).
 

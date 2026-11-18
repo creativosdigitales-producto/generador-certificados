@@ -7,6 +7,11 @@
   <meta name="description" content="Genera certificados en PDF para alumnos y docentes de la Academia." />
   <meta name="robots" content="noindex, nofollow" />
 
+  <!-- Ícono de la pestaña (y de accesos directos en celulares) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icono-32.png" />
+  <link rel="icon" type="image/png" sizes="180x180" href="assets/icono-180.png" />
+  <link rel="apple-touch-icon" href="assets/icono-180.png" />
+
   <!-- Google Fonts: Montserrat + Inter (interfaz) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -132,6 +137,8 @@
                 <span class="seg-thumb" aria-hidden="true"></span>
                 <button type="button" class="seg-btn active" data-value="programacion" role="radio" aria-checked="true"><i data-lucide="code-xml" class="ico"></i>Programación</button>
                 <button type="button" class="seg-btn" data-value="robotica" role="radio" aria-checked="false"><i data-lucide="bot" class="ico"></i>Robótica</button>
+                <!-- data-solo: el botón solo aparece para ese destinatario -->
+                <button type="button" class="seg-btn" data-value="capsulas" data-solo="alumnos" role="radio" aria-checked="false"><i data-lucide="blocks" class="ico"></i>Cápsulas</button>
               </div>
 
               <div class="field">
